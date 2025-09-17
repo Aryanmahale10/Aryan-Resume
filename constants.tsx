@@ -130,7 +130,7 @@ export const MsOfficeIcon: React.FC<{ className?: string }> = ({ className }) =>
 );
 
 export const SqlIcon: React.FC<{ className?: string }> = ({ className }) => (
-    <svg className={className} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#38bdf8">
+    <svg className={className} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#3b82f6">
         <ellipse cx="12" cy="5" rx="9" ry="3" />
         <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
         <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
@@ -139,24 +139,24 @@ export const SqlIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 export const MetabaseIcon: React.FC<{ className?: string }> = ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <rect x="4" y="12" width="4" height="8" rx="1" fill="#38bdf8"/>
-        <rect x="10" y="8" width="4" height="12" rx="1" fill="#94a3b8"/>
-        <rect x="16" y="4" width="4" height="16" rx="1" fill="#f8fafc"/>
+        <rect x="4" y="12" width="4" height="8" rx="1" fill="#3b82f6"/>
+        <rect x="10" y="8" width="4" height="12" rx="1" fill="#9ca3af"/>
+        <rect x="16" y="4" width="4" height="16" rx="1" fill="#e5e7eb"/>
     </svg>
 );
 
 export const BirtIcon: React.FC<{ className?: string }> = ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2a10 10 0 100 20 10 10 0 000-20z" fill="#f8fafc"/>
-        <path d="M12 2a10 10 0 00-7.07 17.07L12 12V2z" fill="#38bdf8"/>
-        <path d="M14 14l6-2a10 10 0 00-4-10l-2 6z" fill="#94a3b8"/>
+        <path d="M12 2a10 10 0 100 20 10 10 0 000-20z" fill="#e5e7eb"/>
+        <path d="M12 2a10 10 0 00-7.07 17.07L12 12V2z" fill="#3b82f6"/>
+        <path d="M14 14l6-2a10 10 0 00-4-10l-2 6z" fill="#9ca3af"/>
     </svg>
 );
 
 export const TallyIcon: React.FC<{ className?: string }> = ({ className }) => (
     <svg className={className} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-         <rect width="24" height="24" rx="4" fill="#38bdf8"/>
-         <path d="M7 7h10v2H7z" fill="#0f172a"/>
-         <path d="M11 9h2v10h-2z" fill="#0f172a"/>
+         <rect width="24" height="24" rx="4" fill="#3b82f6"/>
+         <path d="M7 7h10v2H7z" fill="#0d1120"/>
+         <path d="M11 9h2v10h-2z" fill="#0d1120"/>
     </svg>
 );

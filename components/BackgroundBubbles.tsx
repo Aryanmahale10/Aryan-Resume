@@ -8,6 +8,8 @@ const BackgroundBubbles: React.FC = () => {
         const delay = `${Math.random() * -20}s`;
         const left = `${Math.random() * 100}%`;
         const bgOpacity = Math.random() * 0.15 + 0.05;
+        const isBlue = Math.random() > 0.5;
+        const bubbleColor = isBlue ? '59, 130, 246' : '217, 70, 239'; // Corresponds to dark-accent and dark-accent-end
 
         return (
             <div
@@ -19,8 +21,8 @@ const BackgroundBubbles: React.FC = () => {
                     left: left,
                     animationDuration: duration,
                     animationDelay: delay,
-                    backgroundColor: `rgba(56, 189, 248, ${bgOpacity})`, // dark-accent with random opacity
-                    boxShadow: `0 0 15px rgba(56, 189, 248, ${bgOpacity * 2})`
+                    backgroundColor: `rgba(${bubbleColor}, ${bgOpacity})`,
+                    boxShadow: `0 0 15px rgba(${bubbleColor}, ${bgOpacity * 2})`
                 }}
             />
         );

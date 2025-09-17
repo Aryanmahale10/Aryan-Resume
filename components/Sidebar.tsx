@@ -33,7 +33,9 @@ const Sidebar: React.FC<SidebarProps> = ({ profile, contact, education, summary,
                     className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-dark-accent object-cover shadow-glow"
                 />
                 <h1 className="text-3xl font-bold text-white">{profile.name}</h1>
-                <h2 className="text-lg text-dark-accent font-medium">{profile.title}</h2>
+                <h2 className="text-lg font-medium bg-gradient-to-r from-dark-accent to-dark-accent-end text-transparent bg-clip-text">
+                    {profile.title}
+                </h2>
                 <button
                     onClick={() => { /* Placeholder for download functionality */ }}
                     aria-label="Download Resume"
