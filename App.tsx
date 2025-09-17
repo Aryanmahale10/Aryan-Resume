@@ -10,7 +10,7 @@ import { CanvaIcon, ChatGptIcon, ClaudeAiIcon, GoogleStudioIcon, GeminiIcon, Pow
 const profileData = {
     name: "Aryan Mahale",
     title: "Business Analyst",
-    imageUrl: "https://lh3.googleusercontent.com/a/ACg8ocLs_7Fx2tjgWfve8arSgBtF1FYc3EQ0BULmoVyo_oy9Mv-qMIID=s192-c", 
+    imageUrl: "https://lh3.googleusercontent.com/a/ACg8ocKoVHTXUWhny3c7a3kYI0C4m0jMLZGhvBFiA8bxfuXNRw9N28yu=s360-c-no", 
 };
 
 const contactData: ContactInfo[] = [
