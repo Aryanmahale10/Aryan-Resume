@@ -192,7 +192,7 @@
             );
         };
         
-        const TimelineItem = ({ job }) => {
+        const TimelineItem = ({ item }) => {
             const [isOpen, setIsOpen] = useState(false);
 
             return (
@@ -202,22 +202,22 @@
                         onClick={() => setIsOpen(!isOpen)}
                         className="w-full text-left flex justify-between items-center cursor-pointer group"
                         aria-expanded={isOpen}
-                        aria-controls={`timeline-details-${job.title}`}
+                        aria-controls={`timeline-details-${item.title}`}
                      >
                         <div>
-                            <h4 className="text-lg font-bold text-dark-text-primary group-hover:text-dark-accent transition-colors">{job.title}</h4>
-                            <p className="font-medium text-dark-text-secondary">{job.company}</p>
-                            <time className="text-sm font-normal leading-none text-gray-500">{job.date}</time>
+                            <h4 className="text-lg font-bold text-dark-text-primary group-hover:text-dark-accent transition-colors">{item.title}</h4>
+                            <p className="font-medium text-dark-text-secondary">{item.company}</p>
+                            <time className="text-sm font-normal leading-none text-gray-500">{item.date}</time>
                         </div>
                         <ChevronDownIcon isOpen={isOpen} />
                     </button>
                     <div 
-                        id={`timeline-details-${job.title}`}
+                        id={`timeline-details-${item.title}`}
                         className={`transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'}`}
                     >
                         <div className="p-4 rounded-lg bg-dark-bg">
                             <ul className="list-disc pl-5 space-y-2 text-dark-text-secondary">
-                                {job.details.map((detail, index) => (
+                                {item.details.map((detail, index) => (
                                     <li key={index}>{detail}</li>
                                 ))}
                             </ul>
@@ -302,17 +302,27 @@
             );
         };
 
-        const Dashboard = ({ coreSkills, softSkills, experience, appSkills, expertise }) => {
-            const [sortOrder, setSortOrder] = useState('newest');
+        const Dashboard = ({ coreSkills, softSkills, experience, appSkills, expertise, projects }) => {
+            const [expSortOrder, setExpSortOrder] = useState('newest');
 
             const sortedExperience = useMemo(() => {
                 return [...experience].sort((a, b) => {
                     const dateA = a.startDate ? new Date(a.startDate).getTime() : 0;
                     const dateB = b.startDate ? new Date(b.startDate).getTime() : 0;
-                    return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+                    return expSortOrder === 'newest' ? dateB - dateA : dateA - dateB;
                 });
-            }, [experience, sortOrder]);
+            }, [experience, expSortOrder]);
             
+            const [projectSortOrder, setProjectSortOrder] = useState('newest');
+
+            const sortedProjects = useMemo(() => {
+                return [...projects].sort((a, b) => {
+                    const dateA = a.startDate ? new Date(a.startDate).getTime() : 0;
+                    const dateB = b.startDate ? new Date(b.startDate).getTime() : 0;
+                    return projectSortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+                });
+            }, [projects, projectSortOrder]);
+
             return (
                 <div className="flex flex-col gap-8">
                     <Card title="Career Journey">
@@ -320,20 +330,20 @@
                             <p className="text-sm text-dark-text-secondary mb-2">Sort by:</p>
                             <div className="flex items-center gap-2">
                                 <button 
-                                    onClick={() => setSortOrder('newest')}
-                                    className={`px-4 py-2 text-sm rounded-lg border transition-all duration-300 ${sortOrder === 'newest' ? 'bg-dark-accent/20 text-dark-accent border-dark-accent/50 shadow-md' : 'bg-dark-surface border-dark-border text-dark-text-primary hover:bg-slate-700'}`}>
+                                    onClick={() => setExpSortOrder('newest')}
+                                    className={`px-4 py-2 text-sm rounded-lg border transition-all duration-300 ${expSortOrder === 'newest' ? 'bg-dark-accent/20 text-dark-accent border-dark-accent/50 shadow-md' : 'bg-dark-surface border-dark-border text-dark-text-primary hover:bg-slate-700'}`}>
                                     Newest First
                                 </button>
                                 <button 
-                                     onClick={() => setSortOrder('oldest')}
-                                     className={`px-4 py-2 text-sm rounded-lg border transition-all duration-300 ${sortOrder === 'oldest' ? 'bg-dark-accent/20 text-dark-accent border-dark-accent/50 shadow-md' : 'bg-dark-surface border-dark-border text-dark-text-primary hover:bg-slate-700'}`}>
+                                     onClick={() => setExpSortOrder('oldest')}
+                                     className={`px-4 py-2 text-sm rounded-lg border transition-all duration-300 ${expSortOrder === 'oldest' ? 'bg-dark-accent/20 text-dark-accent border-dark-accent/50 shadow-md' : 'bg-dark-surface border-dark-border text-dark-text-primary hover:bg-slate-700'}`}>
                                     Oldest First
                                 </button>
                             </div>
                         </div>
                         <div className="relative border-l-2 border-dark-border pl-6 space-y-8">
                             {sortedExperience.map((job, index) => (
-                                <TimelineItem key={index} job={job} />
+                                <TimelineItem key={index} item={job} />
                             ))}
                         </div>
                     </Card>
@@ -392,8 +402,31 @@
                                </div>
                            ))}
                        </div>
-                   </Card>
+                    </Card>
                     
+                    <Card title="Projects">
+                        <div className="mb-6 animate-slide-in">
+                            <p className="text-sm text-dark-text-secondary mb-2">Sort by:</p>
+                            <div className="flex items-center gap-2">
+                                <button 
+                                    onClick={() => setProjectSortOrder('newest')}
+                                    className={`px-4 py-2 text-sm rounded-lg border transition-all duration-300 ${projectSortOrder === 'newest' ? 'bg-dark-accent/20 text-dark-accent border-dark-accent/50 shadow-md' : 'bg-dark-surface border-dark-border text-dark-text-primary hover:bg-slate-700'}`}>
+                                    Newest First
+                                </button>
+                                <button 
+                                     onClick={() => setProjectSortOrder('oldest')}
+                                     className={`px-4 py-2 text-sm rounded-lg border transition-all duration-300 ${projectSortOrder === 'oldest' ? 'bg-dark-accent/20 text-dark-accent border-dark-accent/50 shadow-md' : 'bg-dark-surface border-dark-border text-dark-text-primary hover:bg-slate-700'}`}>
+                                    Oldest First
+                                </button>
+                            </div>
+                        </div>
+                        <div className="relative border-l-2 border-dark-border pl-6 space-y-8">
+                            {sortedProjects.map((project, index) => (
+                                <TimelineItem key={index} item={project} />
+                            ))}
+                        </div>
+                    </Card>
+
                 </div>
             );
         };
@@ -426,6 +459,32 @@
         const certificationsData = [
             { name: 'MTSTS Certified – Practical Accounts & Taxation Plus' }, { name: 'Agile Project Management Foundation – LinkedIn' }, { name: 'Scrum Fundamentals' }, { name: 'BFSI Certification – ICT Academy' }, { name: 'IBM Tech Course – Wealth & Asset Management' }, { name: 'Certified Workshop on ChatGPT & AI in Microsoft Office' },
         ];
+        const projectsData = [
+            { 
+                title: 'Automated Financial Reporting Dashboard', 
+                company: 'Academic Project', 
+                date: 'SEP 2023 - DEC 2023', 
+                startDate: '2023-09-01', 
+                details: [ 
+                    'Designed and developed a comprehensive financial reporting dashboard using Power BI to automate monthly performance analysis.',
+                    'Integrated multiple data sources including SQL databases and Excel sheets, ensuring data accuracy and consistency.',
+                    'Created interactive visualizations, including trend analysis and variance charts, which reduced manual reporting time by 60%.',
+                    'Presented the dashboard to faculty, receiving commendation for its clarity and actionable insights.'
+                ] 
+            },
+            { 
+                title: 'Market Basket Analysis for Retail Client', 
+                company: 'Freelance Project', 
+                date: 'JUN 2023 - AUG 2023', 
+                startDate: '2023-06-01', 
+                details: [ 
+                    'Conducted market basket analysis for a local retail store to identify product associations and improve cross-selling strategies.',
+                    'Utilized SQL to query sales data and performed association rule mining to uncover purchasing patterns.',
+                    'Developed a report with key findings and actionable recommendations, such as product bundling and store layout adjustments.',
+                    'The client reported a 15% increase in average transaction value after implementing the suggested strategies.'
+                ] 
+            }
+        ];
 
         // --- MAIN APP COMPONENT ---
         const App = () => {
@@ -449,6 +508,7 @@
                                 experience={experienceData}
                                 appSkills={appSkillsData}
                                 expertise={expertiseData}
+                                projects={projectsData}
                             />
                         </div>
                     </main>
