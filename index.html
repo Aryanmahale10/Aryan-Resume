@@ -227,7 +227,7 @@
             );
         };
         
-        const Sidebar = ({ profile, contact, education, summary, certifications }) => {
+        const Sidebar = ({ profile, contact, education, summary, certifications, coreSkills, softSkills }) => {
             const contactIconMap = {
                 Phone: <PhoneIcon />,
                 Email: <MailIcon />,
@@ -298,11 +298,36 @@
                             ))}
                         </ul>
                     </Card>
+                    
+                    <Card title="Expertise">
+                        <div className="flex flex-col gap-6">
+                            <div>
+                                <h4 className="font-semibold text-dark-text-primary mb-3">Core Expertise</h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {coreSkills.map((skill) => (
+                                        <span key={skill} className="bg-dark-accent/10 text-dark-accent text-sm font-medium px-3 py-1 rounded-full border border-dark-accent/20">
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold text-dark-text-primary mb-3">Soft Expertise</h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {softSkills.map((skill) => (
+                                        <span key={skill} className="bg-dark-accent/10 text-dark-accent text-sm font-medium px-3 py-1 rounded-full border border-dark-accent/20">
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
                 </aside>
             );
         };
 
-        const Dashboard = ({ coreSkills, softSkills, experience, appSkills, expertise, projects }) => {
+        const Dashboard = ({ experience, appSkills, expertise, projects }) => {
             const [expSortOrder, setExpSortOrder] = useState('newest');
 
             const sortedExperience = useMemo(() => {
@@ -345,31 +370,6 @@
                             {sortedExperience.map((job, index) => (
                                 <TimelineItem key={index} item={job} />
                             ))}
-                        </div>
-                    </Card>
-
-                    <Card title="Expertise">
-                        <div className="flex flex-col gap-6">
-                            <div>
-                                <h4 className="font-semibold text-dark-text-primary mb-3">Core Expertise</h4>
-                                <div className="flex flex-wrap gap-2">
-                                    {coreSkills.map((skill) => (
-                                        <span key={skill} className="bg-dark-accent/10 text-dark-accent text-sm font-medium px-3 py-1 rounded-full border border-dark-accent/20">
-                                            {skill}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold text-dark-text-primary mb-3">Soft Expertise</h4>
-                                <div className="flex flex-wrap gap-2">
-                                    {softSkills.map((skill) => (
-                                        <span key={skill} className="bg-dark-accent/10 text-dark-accent text-sm font-medium px-3 py-1 rounded-full border border-dark-accent/20">
-                                            {skill}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
                         </div>
                     </Card>
 
@@ -453,8 +453,8 @@
             { title: 'Treasury', skills: ['ALM', 'Money Market', 'Forex', 'Fixed Income'] }, { title: 'Instruments Product & Technical', skills: ['BRDs', 'FSDs', 'User Stories', 'Wireframes'] }, { title: 'SDLC & Methodologies', skills: ['Agile & Waterfall project delivery'] }, { title: 'Data Analysis', skills: ['SQL', 'Financial Data Formats'] }, { title: 'Stakeholder Management', skills: ['Client Engagement', 'Presales Demos', 'UAT'] }, { title: 'Regulatory & Compliance', skills: ['SEBI & RBI'] },
         ];
         const experienceData = [
-            { title: 'Business Analyst - Trainee Assistant Consultant', company: 'Credence Analytics, Mumbai', date: 'JAN 2025 - PRESENT', startDate: '2025-01-01', details: [ '- Worked on IDeal 6, Credence Analytics flagship product, with a focus on the FX (Foreign Exchange) module.', '- Good understanding of Merchant and Interbank functional processes in Forex.', '- Proficient in SQL for backend support', '- Hands-on knowledge of SWIFT message facility and its integration in treasury operations.', '- Ability to bridge functional and technical aspects, ensuring smooth execution of treasury workflows.', '- Successfully led go-live implementation and ongoing system support for enterprise clients.', '- Authored and maintained Business Requirement Documents (BRDs) to streamline project execution.', '- Built and maintained dashboards and custom reports using Metabase and BIRT,enabling real-time data analysis and decision-making.', '- Handled change requests from clients, ensuring timely delivery and alignment with business needs.', '- Took initiative in proposing and implementing product enhancements to improve functionality and user experience' ] },
-            { title: 'Project Support - Intern', company: 'Credence Analytics, Mumbai', date: 'MAY 2024 - DEC 2024', startDate: '2024-05-13', details: [ 'Served as the liaison between business stakeholders and technical teams.', 'Collaborated with cross-functional teams to manage project timelines, deliverables, and documentation.', '- Exposure to Forex deal lifecycle management, from booking to settlement.', '- Took initiative in proposing and implementing product enhancements to improve functionality and user experience' ] }
+            { title: 'Business Analyst', company: 'Credence Analytics, Mumbai', date: 'JAN 2025 - PRESENT', startDate: '2025-01-01', details: [ '- Worked on IDeal 6, Credence Analytics flagship product, with a focus on the FX (Foreign Exchange) module.', '- Good understanding of Merchant and Interbank functional processes in Forex.', '- Proficient in SQL for backend support', '- Hands-on knowledge of SWIFT message facility and its integration in treasury operations.', '- Ability to bridge functional and technical aspects, ensuring smooth execution of treasury workflows.', '- Successfully led go-live implementation and ongoing system support for enterprise clients.', '- Authored and maintained Business Requirement Documents (BRDs) to streamline project execution.', '- Built and maintained dashboards and custom reports using Metabase and BIRT,enabling real-time data analysis and decision-making.', '- Handled change requests from clients, ensuring timely delivery and alignment with business needs.', '- Took initiative in proposing and implementing product enhancements to improve functionality and user experience' ] },
+            { title: 'Business Analyst - Intern', company: 'Credence Analytics, Mumbai', date: 'MAY 2024 - DEC 2024', startDate: '2024-05-13', details: [ 'Served as the liaison between business stakeholders and technical teams.', 'Collaborated with cross-functional teams to manage project timelines, deliverables, and documentation.', '- Exposure to Forex deal lifecycle management, from booking to settlement.', '- Took initiative in proposing and implementing product enhancements to improve functionality and user experience' ] }
         ];
         const certificationsData = [
             { name: 'MTSTS Certified – Practical Accounts & Taxation Plus' }, { name: 'Agile Project Management Foundation – LinkedIn' }, { name: 'Scrum Fundamentals' }, { name: 'BFSI Certification – ICT Academy' }, { name: 'IBM Tech Course – Wealth & Asset Management' }, { name: 'Certified Workshop on ChatGPT & AI in Microsoft Office' },
@@ -499,12 +499,12 @@
                                 education={educationData}
                                 summary={summaryData}
                                 certifications={certificationsData}
+                                coreSkills={coreSkillsData}
+                                softSkills={softSkillsData}
                             />
                         </div>
                         <div className="lg:col-span-3">
                             <Dashboard 
-                                coreSkills={coreSkillsData}
-                                softSkills={softSkillsData}
                                 experience={experienceData}
                                 appSkills={appSkillsData}
                                 expertise={expertiseData}
