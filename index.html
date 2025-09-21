@@ -217,9 +217,19 @@
                     >
                         <div className="p-4 rounded-lg bg-dark-bg">
                             <ul className="list-disc pl-5 space-y-2 text-dark-text-secondary">
-                                {item.details.map((detail, index) => (
-                                    <li key={index}>{detail}</li>
-                                ))}
+                                {item.details.map((detail, index) => {
+                                    if (typeof detail === 'string' && detail.toLowerCase().startsWith('link:')) {
+                                        const url = detail.substring(5).trim();
+                                        if (url.startsWith('http')) {
+                                            return (
+                                                <li key={index}>
+                                                    Link: <a href={url} target="_blank" rel="noopener noreferrer" className="text-dark-accent hover:underline break-all">{url}</a>
+                                                </li>
+                                            );
+                                        }
+                                    }
+                                    return <li key={index}>{detail}</li>;
+                                })}
                             </ul>
                         </div>
                     </div>
@@ -460,29 +470,42 @@
             { name: 'MTSTS Certified – Practical Accounts & Taxation Plus' }, { name: 'Agile Project Management Foundation – LinkedIn' }, { name: 'Scrum Fundamentals' }, { name: 'BFSI Certification – ICT Academy' }, { name: 'IBM Tech Course – Wealth & Asset Management' }, { name: 'Certified Workshop on ChatGPT & AI in Microsoft Office' },
         ];
         const projectsData = [
-            { 
-                title: 'Automated Financial Reporting Dashboard', 
-                company: 'Academic Project', 
-                date: 'SEP 2023 - DEC 2023', 
-                startDate: '2023-09-01', 
-                details: [ 
-                    'Designed and developed a comprehensive financial reporting dashboard using Power BI to automate monthly performance analysis.',
-                    'Integrated multiple data sources including SQL databases and Excel sheets, ensuring data accuracy and consistency.',
-                    'Created interactive visualizations, including trend analysis and variance charts, which reduced manual reporting time by 60%.',
-                    'Presented the dashboard to faculty, receiving commendation for its clarity and actionable insights.'
-                ] 
+            {
+                title: 'Forex AI Dashboard',
+                company: 'Personal Project',
+                date: 'Present',
+                startDate: '2024-04-01',
+                details: [
+                    'Link: https://aistudio.google.com/apps/drive/16A4jQjEGaNi5HkaTSGuMBTXG69LalazL?showAssistant=true&showPreview=true',
+                    '----------🔧 Key Features',
+                    'Live Currency Rates: Displays up-to-date exchange rates for major currency pairs.',
+                    'Interactive Charts: Real-time line, candlestick, and bar charts for market trends.',
+                    'Portfolio Tracking: Enables users to track their Forex positions and profits/losses.',
+                    'News & Alerts: Integrates Forex news and sends notifications for market movements.',
+
+                    '----------🚀 Future Enhancements',
+                    'Automated Trading Signals: Implement AI-driven trade recommendations.',
+                    'Advanced Analytics: Introduce portfolio risk analysis and currency correlation insights.',
+                    'Educational Resources: Tutorials and guides for Forex beginners.'
+                ]
             },
-            { 
-                title: 'Market Basket Analysis for Retail Client', 
-                company: 'Freelance Project', 
-                date: 'JUN 2023 - AUG 2023', 
-                startDate: '2023-06-01', 
-                details: [ 
-                    'Conducted market basket analysis for a local retail store to identify product associations and improve cross-selling strategies.',
-                    'Utilized SQL to query sales data and performed association rule mining to uncover purchasing patterns.',
-                    'Developed a report with key findings and actionable recommendations, such as product bundling and store layout adjustments.',
-                    'The client reported a 15% increase in average transaction value after implementing the suggested strategies.'
-                ] 
+            {
+                title: 'Market Maven',
+                company: 'Personal Project',
+                date: 'Present',
+                startDate: '2024-01-01',
+                details: [
+                    'Link: https://dea844ec-b3db-49b3-8e78-6474a0baeabe-00-f7x6lt9munuc.riker.replit.dev',
+                    '----------🔧 Key Features',
+                    'Comprehensive Finance Product Listings: Showcases a wide range of financial products, including investment platforms, stock market analysis tools, personal finance advice, and cryptocurrency news.',
+                    'Portfolio Builder: Allows users to create and manage diversified investment portfolios.',
+                    'Risk Profiling: Assesses user risk tolerance to recommend suitable financial products.',
+
+                    '----------🚀 Next Steps & Future Enhancements',
+                    'User Feedback: Gathering user insights to refine features and improve usability.',
+                    'Mobile Optimization: Ensuring the website is fully responsive across all devices.',
+                    'Feature Expansion: Planning to add more personalized financial tools and resources.'
+                ]
             }
         ];
 
