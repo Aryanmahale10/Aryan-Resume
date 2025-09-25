@@ -213,24 +213,26 @@
                     </button>
                     <div 
                         id={`timeline-details-${item.title}`}
-                        className={`transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'}`}
+                        className={`transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-[1200px] opacity-100 mt-4' : 'max-h-0 opacity-0'}`}
                     >
-                        <div className="p-4 rounded-lg bg-dark-bg">
-                            <ul className="list-disc pl-5 space-y-2 text-dark-text-secondary">
-                                {item.details.map((detail, index) => {
-                                    if (typeof detail === 'string' && detail.toLowerCase().startsWith('link:')) {
-                                        const url = detail.substring(5).trim();
-                                        if (url.startsWith('http')) {
-                                            return (
-                                                <li key={index}>
-                                                    Link: <a href={url} target="_blank" rel="noopener noreferrer" className="text-dark-accent hover:underline break-all">{url}</a>
-                                                </li>
-                                            );
-                                        }
-                                    }
-                                    return <li key={index}>{detail}</li>;
-                                })}
-                            </ul>
+                        <div className="p-4 rounded-lg bg-dark-bg space-y-4">
+                             {item.details.map((section, index) => (
+                                 <div key={index}>
+                                    <h5 className="font-semibold text-dark-text-primary mb-2">{section.subheading}</h5>
+                                    <ul className="list-disc pl-5 space-y-2 text-dark-text-secondary">
+                                        {section.points.map((point, pIndex) => {
+                                             if (typeof point === 'object' && point.link) {
+                                                return (
+                                                    <li key={pIndex}>
+                                                        <a href={point.link} target="_blank" rel="noopener noreferrer" className="text-dark-accent hover:underline break-all">{point.text || point.link}</a>
+                                                    </li>
+                                                )
+                                            }
+                                            return <li key={pIndex}>{point}</li>;
+                                        })}
+                                    </ul>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -463,8 +465,44 @@
             { title: 'Treasury', skills: ['ALM', 'Money Market', 'Forex', 'Fixed Income'] }, { title: 'Instruments Product & Technical', skills: ['BRDs', 'FSDs', 'User Stories', 'Wireframes'] }, { title: 'SDLC & Methodologies', skills: ['Agile & Waterfall project delivery'] }, { title: 'Data Analysis', skills: ['SQL', 'Financial Data Formats'] }, { title: 'Stakeholder Management', skills: ['Client Engagement', 'Presales Demos', 'UAT'] }, { title: 'Regulatory & Compliance', skills: ['SEBI & RBI'] },
         ];
         const experienceData = [
-            { title: 'Business Analyst', company: 'Credence Analytics, Mumbai', date: 'JAN 2025 - PRESENT', startDate: '2025-01-01', details: [ '- Worked on IDeal 6, Credence Analytics flagship product, with a focus on the FX (Foreign Exchange) module.', '- Good understanding of Merchant and Interbank functional processes in Forex.', '- Proficient in SQL for backend support', '- Hands-on knowledge of SWIFT message facility and its integration in treasury operations.', '- Ability to bridge functional and technical aspects, ensuring smooth execution of treasury workflows.', '- Successfully led go-live implementation and ongoing system support for enterprise clients.', '- Authored and maintained Business Requirement Documents (BRDs) to streamline project execution.', '- Built and maintained dashboards and custom reports using Metabase and BIRT,enabling real-time data analysis and decision-making.', '- Handled change requests from clients, ensuring timely delivery and alignment with business needs.', '- Took initiative in proposing and implementing product enhancements to improve functionality and user experience' ] },
-            { title: 'Business Analyst - Intern', company: 'Credence Analytics, Mumbai', date: 'MAY 2024 - DEC 2024', startDate: '2024-05-13', details: [ 'Served as the liaison between business stakeholders and technical teams.', 'Collaborated with cross-functional teams to manage project timelines, deliverables, and documentation.', '- Exposure to Forex deal lifecycle management, from booking to settlement.', '- Took initiative in proposing and implementing product enhancements to improve functionality and user experience' ] }
+            { 
+                title: 'Business Analyst', 
+                company: 'Credence Analytics, Mumbai', 
+                date: 'May 2024 - PRESENT', 
+                startDate: '2024-05-01', 
+                details: [
+                    {
+                        subheading: "Overview & Core Responsibilities",
+                        points: [
+                            'Company Overview: Provides flagship product in financial systems to the Bank Treasury department.',
+                            'Worked on IDeal 6, Credence Analytics flagship product, with a focus on the FX (Foreign Exchange) module.',
+                            'Good understanding of Merchant and Interbank functional processes in Forex.',
+                            'Exposure to Forex deal lifecycle management, from booking to settlement.',
+                            'Ability to bridge functional and technical aspects, ensuring smooth execution of treasury workflows.'
+                        ]
+                    },
+                    {
+                        subheading: "Technical & Analytical Expertise",
+                        points: [
+                            'Proficient in SQL for backend support.',
+                            'Hands-on knowledge of SWIFT message facility and its integration in treasury operations.',
+                            'Skilled in handling and configuring Risk Limit modules (e.g., NOPL, Deal Limits, AGL, IGL, Lending & Borrowing).',
+                            'Built and maintained dashboards and custom reports using Metabase and BIRT, enabling real-time data analysis and decision-making.',
+                            'Experience in designing and building dashboards for Forex Treasury (real-time positions, limits monitoring, and reporting).'
+                        ]
+                    },
+                    {
+                        subheading: "Project & Client Management",
+                        points: [
+                            'Successfully led go-live implementation and ongoing system support for enterprise clients.',
+                            'Authored and maintained Business Requirement Documents (BRDs) to streamline project execution.',
+                            'Handled change requests from clients, ensuring timely delivery and alignment with business needs.',
+                            'Took initiative in proposing and implementing product enhancements to improve functionality and user experience.',
+                            'Onboarded and mentored new trainees to ensure knowledge transfer and smooth team integration.'
+                        ]
+                    }
+                ] 
+            }
         ];
         const certificationsData = [
             { name: 'MTSTS Certified – Practical Accounts & Taxation Plus' }, { name: 'Agile Project Management Foundation – LinkedIn' }, { name: 'Scrum Fundamentals' }, { name: 'BFSI Certification – ICT Academy' }, { name: 'IBM Tech Course – Wealth & Asset Management' }, { name: 'Certified Workshop on ChatGPT & AI in Microsoft Office' },
@@ -476,17 +514,24 @@
                 date: 'Present',
                 startDate: '2024-04-01',
                 details: [
-                    'Link: https://aistudio.google.com/apps/drive/16A4jQjEGaNi5HkaTSGuMBTXG69LalazL?showAssistant=true&showPreview=true',
-                    '----------🔧 Key Features',
-                    'Live Currency Rates: Displays up-to-date exchange rates for major currency pairs.',
-                    'Interactive Charts: Real-time line, candlestick, and bar charts for market trends.',
-                    'Portfolio Tracking: Enables users to track their Forex positions and profits/losses.',
-                    'News & Alerts: Integrates Forex news and sends notifications for market movements.',
-
-                    '----------🚀 Future Enhancements',
-                    'Automated Trading Signals: Implement AI-driven trade recommendations.',
-                    'Advanced Analytics: Introduce portfolio risk analysis and currency correlation insights.',
-                    'Educational Resources: Tutorials and guides for Forex beginners.'
+                    { subheading: 'Link', points: [{ link: 'https://aistudio.google.com/apps/drive/16A4jQjEGaNi5HkaTSGuMBTXG69LalazL?showAssistant=true&showPreview=true', text: 'View on Google AI Studio' }] },
+                    { 
+                        subheading: 'Key Features', 
+                        points: [
+                            'Live Currency Rates: Displays up-to-date exchange rates for major currency pairs.',
+                            'Interactive Charts: Real-time line, candlestick, and bar charts for market trends.',
+                            'Portfolio Tracking: Enables users to track their Forex positions and profits/losses.',
+                            'News & Alerts: Integrates Forex news and sends notifications for market movements.'
+                        ]
+                    },
+                    {
+                        subheading: 'Future Enhancements',
+                        points: [
+                            'Automated Trading Signals: Implement AI-driven trade recommendations.',
+                            'Advanced Analytics: Introduce portfolio risk analysis and currency correlation insights.',
+                            'Educational Resources: Tutorials and guides for Forex beginners.'
+                        ]
+                    }
                 ]
             },
             {
@@ -495,16 +540,23 @@
                 date: 'Present',
                 startDate: '2024-01-01',
                 details: [
-                    'Link: https://dea844ec-b3db-49b3-8e78-6474a0baeabe-00-f7x6lt9munuc.riker.replit.dev',
-                    '----------🔧 Key Features',
-                    'Comprehensive Finance Product Listings: Showcases a wide range of financial products, including investment platforms, stock market analysis tools, personal finance advice, and cryptocurrency news.',
-                    'Portfolio Builder: Allows users to create and manage diversified investment portfolios.',
-                    'Risk Profiling: Assesses user risk tolerance to recommend suitable financial products.',
-
-                    '----------🚀 Next Steps & Future Enhancements',
-                    'User Feedback: Gathering user insights to refine features and improve usability.',
-                    'Mobile Optimization: Ensuring the website is fully responsive across all devices.',
-                    'Feature Expansion: Planning to add more personalized financial tools and resources.'
+                    { subheading: 'Link', points: [{ link: 'https://dea844ec-b3db-49b3-8e78-6474a0baeabe-00-f7x6lt9munuc.riker.replit.dev', text: 'View on Replit'}] },
+                    { 
+                        subheading: 'Key Features',
+                        points: [
+                            'Comprehensive Finance Product Listings: Showcases a wide range of financial products, including investment platforms, stock market analysis tools, personal finance advice, and cryptocurrency news.',
+                            'Portfolio Builder: Allows users to create and manage diversified investment portfolios.',
+                            'Risk Profiling: Assesses user risk tolerance to recommend suitable financial products.'
+                        ]
+                    },
+                    {
+                        subheading: 'Next Steps & Future Enhancements',
+                        points: [
+                            'User Feedback: Gathering user insights to refine features and improve usability.',
+                            'Mobile Optimization: Ensuring the website is fully responsive across all devices.',
+                            'Feature Expansion: Planning to add more personalized financial tools and resources.'
+                        ]
+                    }
                 ]
             }
         ];
